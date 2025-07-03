@@ -22,5 +22,53 @@ namespace place_block_wpf_ares.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastBlockPath {
+            get {
+                return ((string)(this["LastBlockPath"]));
+            }
+            set {
+                this["LastBlockPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastCoordinatesPath {
+            get {
+                return ((string)(this["LastCoordinatesPath"]));
+            }
+            set {
+                this["LastCoordinatesPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastBlockNameInput {
+            get {
+                return ((string)(this["LastBlockNameInput"]));
+            }
+            set {
+                this["LastBlockNameInput"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastEtageInput {
+            get {
+                return ((string)(this["LastEtageInput"]));
+            }
+            set {
+                this["LastEtageInput"] = value;
+            }
+        }
     }
 }
