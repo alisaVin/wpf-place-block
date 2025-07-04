@@ -4,15 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:place_block_wpf_ares.src.Views"
+             xmlns:vm="clr-namespace:place_block_wpf_ares.src.ViewModels"
              mc:Ignorable="d" 
-             Height="450" Width="500" 
-             MinHeight="300" MinWidth="350"
-             Background="WhiteSmoke">
+             Title="Blöcke auf die Koordinatenpunte einfügen"
+             Height="400" Width="500" 
+             MinHeight="250" MinWidth="350"
+             Background="WhiteSmoke"
+             WindowStyle="SingleBorderWindow"
+             WindowStartupLocation="CenterOwner"
+             FontFamily="Segoe UI">
 
-    <Window.CommandBindings>
-        <!--Commands-->
-    </Window.CommandBindings>
-    
     <Grid Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
@@ -34,10 +35,9 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="35" />
             </Grid.ColumnDefinitions>
-            <TextBox x:Name ="coordPath" Grid.Column="0" Height="25" VerticalAlignment="Top"
+            <TextBox x:Name ="coordFilePath" Text="{Binding CoordPath}" Grid.Column="0" Height="25" VerticalAlignment="Top"
                      HorizontalAlignment="Stretch"/>
-            <Button Grid.Column="1" Width="25" Height="25" HorizontalAlignment="Right" 
-                    Content="..."/>
+            <Button Grid.Column="1" Width="25" Height="25" HorizontalAlignment="Right" Content="..." Click="selCoordBtn_Click"/>
         </Grid>
         <Grid Grid.Row="2">
             <Label HorizontalAlignment="Left" FontSize="12">Pfad zur Blockdatei (.dwg)</Label>
@@ -47,10 +47,9 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="35" />
             </Grid.ColumnDefinitions>
-            <TextBox x:Name ="blockPath" Grid.Column="0" Height="25" VerticalAlignment="Top"
-                     HorizontalAlignment="Stretch"/>
-            <Button Grid.Column="1" Width="25" Height="25" HorizontalAlignment="Right" 
-                    Content="..."/>
+            <TextBox x:Name ="blockFilePath" Text="{Binding BlockPath}" Grid.Column="0" Height="25" VerticalAlignment="Top"
+                     HorizontalAlignment="Stretch" />
+            <Button Grid.Column="1"  Width="25" Height="25" HorizontalAlignment="Right" Content="..." Click="selBlockBtn_Click"/>
         </Grid>
         <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
@@ -65,9 +64,9 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name ="blockName" Grid.Column="0" Height="25" Margin="0,0,5,0" VerticalAlignment="Top"
+            <TextBox x:Name ="blockName" Text ="{Binding BlockName}" Grid.Column="0" Height="25" Margin="0,0,5,0" VerticalAlignment="Top"
                      HorizontalAlignment="Stretch"/>
-            <TextBox x:Name ="etageInput" Grid.Column="1" Height="25" Margin="5,0,0,0" VerticalAlignment="Top"
+            <TextBox x:Name ="etageInput" Text="{Binding EtageInput}" Grid.Column="1" Height="25" Margin="5,0,0,0" VerticalAlignment="Top"
          HorizontalAlignment="Stretch"/>
         </Grid>
         <Grid Grid.Row="6">
@@ -77,16 +76,16 @@
                 <ColumnDefinition Width="80" />
             </Grid.ColumnDefinitions>
             <Button Grid.Column="1" Width="75" Height="25" HorizontalAlignment="Right" 
-                    VerticalAlignment="Center" Content="Abbrechen"/>
+                    VerticalAlignment="Center" Content="Abbrechen" IsCancel="True"/>
             <Button Grid.Column="2" Width="75" Height="25" HorizontalAlignment="Right" 
-                    VerticalAlignment="Center" Content="Einfügen"/>
+                    VerticalAlignment="Center" Content="Einfügen" Command="{Binding InsertCommand}"/>
         </Grid>
         <Grid Grid.Row="7">
             <ProgressBar Height="20"
                          HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
         </Grid>
         <Grid Grid.Row="8">
-            <RichTextBox x:Name="richTextBox"/>
+            <TextBlock FontSize="12" Text="{Binding Reporter, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         </Grid>
     </Grid>
 </Window>

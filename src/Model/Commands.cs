@@ -6,9 +6,9 @@ using Teigha.EditorInput;
 using Teigha.Runtime;
 using app = Teigha.ApplicationServices.Application;
 
-[assembly: CommandClass(typeof(place_block_wpf_ares.src.Commands.ARESCommands))]
+[assembly: CommandClass(typeof(place_block_wpf_ares.src.Model.ARESCommands))]
 
-namespace place_block_wpf_ares.src.Commands
+namespace place_block_wpf_ares.src.Model
 {
     public class ARESCommands
     {
@@ -19,6 +19,7 @@ namespace place_block_wpf_ares.src.Commands
         string blockPath;
         string blockName;
         string etageInput;
+        AresOperations operations;
 
         public ARESCommands()
         {
@@ -29,6 +30,7 @@ namespace place_block_wpf_ares.src.Commands
             blockPath = Settings.Default.LastBlockPath;
             blockName = Settings.Default.LastBlockNameInput;
             etageInput = Settings.Default.LastEtageInput;
+            operations = new AresOperations();
         }
 
         [CommandMethod("PLACEBLOCKFORM")]
@@ -36,8 +38,24 @@ namespace place_block_wpf_ares.src.Commands
         {
             var dialog = new ModaelssWpfDialog();
             var result = app.ShowModalWindow(dialog);
+            if (result.Value)
+            {
+                operations.InsertBlocks(doc, db, coordPath, blockPath, blockName, etageInput);
+            }
         }
 
+        #region Register commands
+        [CommandMethod("RegWpfApp")]
+        public static void RegisterAppOnDemand()
+        {
+            DemandLoadingService.RegisterForDemandLoading();
+        }
 
+        [CommandMethod("UnregWpfApp")]
+        public static void UnregisterApp()
+        {
+            DemandLoadingService.UnregisterForDemandLoading();
+        }
+        #endregion
     }
 }
